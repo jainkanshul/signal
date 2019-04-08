@@ -1,0 +1,148 @@
+
+
+<mat-card  *ngIf="isSubscriptionClicked">
+  <form (submit) = onsendDetail(postForm)  #postForm="ngForm">
+    <p>
+        <mat-form-field>
+            <input
+        matInput
+        rows="1"
+        type="text"
+            disabled [value] = "selectedUser.email" />
+        </mat-form-field>
+        </p>
+  <p>
+<mat-form-field>
+  <input matInput #fromInput [matDatepicker]="picker" placeholder="fromdate"   (dateInput)="addStartDate('input', $event)" (dateChange)="addStartDate('change', $event)" disabled>
+  <mat-datepicker-toggle matSuffix [for]="picker" ></mat-datepicker-toggle>
+  <mat-datepicker #picker disabled="false"></mat-datepicker>
+</mat-form-field>
+</p>
+
+<p>
+<mat-form-field>
+    <input matInput #endInput [min]="selectedUser.fromdate"  [matDatepicker]="picker2" placeholder="enddate" (dateInput)="addEnddate('input', $event)" (dateChange)="addEnddate('change', $event)"disabled>
+    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+    <mat-datepicker #picker2 disabled="false"></mat-datepicker>
+     
+  </mat-form-field>
+</p>
+
+<p>
+<mat-form-field>
+<input
+[ngModel]="selectedUser?.amountrecive"
+matInput
+rows="1"
+type="number"
+name="amountrecive"
+required
+placeholder="Amount Recieved" #amountrecive="ngModel"/>
+<mat-error *ngIf="amountrecive.invalid">Please enter a post title.</mat-error>
+</mat-form-field>
+</p>
+
+<button
+mat-raised-button
+color="accent"
+type="submit">Send Detail</button>
+
+
+<button
+mat-raised-button class = "dismissbutton"
+color="accent"
+type="dismiss" (click)="dismiss()">Dismiss</button>
+</form>
+</mat-card>
+
+<mat-spinner *ngIf="isLoading"></mat-spinner>
+
+<mat-card  *ngIf="!isLoading && !isSubscriptionClicked">
+  
+<form>
+<mat-form-field class="filter">
+
+  <input  matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+</mat-form-field>
+
+  <button class = "buttonright2"
+  mat-raised-button
+  color="accent"
+  type="Subscribe" (click)="subscribe()">Subscribe</button>
+
+  <button class = "buttonright3"
+  mat-raised-button
+  color="accent"
+  type="trial" (click)="trial()">Aproove trial</button>
+</form>
+
+
+<div class="mat-elevation-z8">
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+  <!-- Checkbox Column -->
+  <ng-container matColumnDef="select">
+    <th mat-header-cell *matHeaderCellDef>
+      <mat-checkbox (change)="$event ? masterToggle() : null"
+                    [checked]="selection.hasValue() && isAllSelected()"
+                    [indeterminate]="selection.hasValue() && !isAllSelected()">
+      </mat-checkbox>
+    </th>
+    <td mat-cell *matCellDef="let row">
+      <mat-checkbox (click)="$event.stopPropagation()"
+                    (change)="$event ? selection.toggle(row) : null"
+                    [checked]="selection.isSelected(row)">
+      </mat-checkbox>
+    </td>
+  </ng-container>
+
+  <!-- Position Column -->
+  <!-- <ng-container matColumnDef="position">
+    <th mat-header-cell *matHeaderCellDef> No. </th>
+    <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+  </ng-container> -->
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="email">
+    <th mat-header-cell *matHeaderCellDef> email </th>
+    <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+  </ng-container>
+
+  <!-- Weight Column -->
+  <ng-container matColumnDef="services">
+    <th mat-header-cell *matHeaderCellDef> services </th>
+    <td mat-cell *matCellDef="let element" > {{element.services}} </td>
+  </ng-container>
+
+  <!-- Weight Column -->
+  <ng-container matColumnDef="phone">
+    <th mat-header-cell *matHeaderCellDef> phone </th>
+    <td mat-cell *matCellDef="let element"> {{element.phone}} </td>
+  </ng-container>
+
+  <!-- Symbol Column -->
+  <ng-container matColumnDef="country">
+    <th mat-header-cell *matHeaderCellDef> country </th>
+    <td mat-cell *matCellDef="let element"> {{element.country}} </td>
+  </ng-container>
+   <!-- Symbol Column -->
+
+   <ng-container matColumnDef="Free trial Aprroved">
+    <th mat-header-cell *matHeaderCellDef> Free trial Aprroved </th>
+    <td mat-cell *matCellDef="let element"> {{element.isfreetrailaproove}} </td>
+  </ng-container>
+  
+  <ng-container matColumnDef="Free trial expired">
+    <th mat-header-cell *matHeaderCellDef> Free trial expired </th>
+    <td mat-cell *matCellDef="let element"> {{element.isexpire}} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+      (click)="selection.toggle(row)">
+  </tr>
+</table>
+<!-- <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator> -->
+</div>
+</mat-card>
+

@@ -1,0 +1,25 @@
+<mat-card>
+    <mat-spinner *ngIf="isLoading"></mat-spinner>
+    <form (submit)="onSavePost(postForm)" #postForm="ngForm" *ngIf="!isLoading">
+  <mat-form-field class="example-full-width">
+    <input matInput type="text"
+    name="preffix" placeholder="preffix" [ngModel]="post?.preffix"
+    #preffix = "ngModel">
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <input matInput  placeholder="suffix" type="text"
+    name="suffix"  [ngModel]="post?.suffix"
+    #suffix = "ngModel">
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <input matInput  placeholder="Template Name" type="text"
+    name="name"  [ngModel]="post?.templatename"
+    #templatename = "ngModel">
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <textarea  matInput placeholder="Add message" name="message" [ngModel]="post?.message"
+    #message = "ngModel"></textarea>
+  </mat-form-field>
+  <button mat-raised-button color="accent" type="submit">Save Record</button>
+</form>
+</mat-card>

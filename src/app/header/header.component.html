@@ -1,0 +1,65 @@
+<!-- <mat-toolbar color="primary">
+  <span>
+    <a routerLink="/">MyMessages</a>
+  </span>
+  <span class="spacer"></span>
+  <ul>
+    <li>
+    <a mat-button routerLink="/createtemp" routerLinkActive="mat-accent">Create Template</a>
+  </li>
+</ul>
+<span class="spacerright"></span>
+  <ul>
+    <li>
+      <a mat-button routerLink="/create" routerLinkActive="mat-accent">New Post</a>
+    </li>
+  </ul>
+  <span class="spaceright"></span>
+  <ul>
+    <li>
+    <a mat-button routerLink="/freetrial" routerLinkActive="mat-accent">Free trial</a>
+  </li>
+</ul>
+<span class="spaceright"></span>
+  <ul>
+    <li>
+    <a mat-button routerLink="/subscribed" routerLinkActive="mat-accent">Subscribed User</a>
+  </li>
+</ul>
+</mat-toolbar> -->
+
+
+<mat-toolbar color="primary">
+  <ul>
+ 
+    <li *ngIf="!userIsAuthenticated">
+      <a mat-button routerLink="/" routerLinkActive="mat-accent">Login</a>
+    </li>
+      <li *ngIf="userIsAuthenticated">
+      <a mat-button routerLink="/createtemp" routerLinkActive="mat-accent">Create Template</a>
+    </li>
+    <li *ngIf="userIsAuthenticated">
+     <a mat-button routerLink="/create" routerLinkActive="mat-accent">New Post</a>
+      </li>
+      <li *ngIf="userIsAuthenticated">
+      <a mat-button routerLink="/freetrial" routerLinkActive="mat-accent">Free trial</a>
+    </li>
+      <li *ngIf="userIsAuthenticated">
+      <a mat-button routerLink="/subscribed" routerLinkActive="mat-accent">Subscribed User</a>
+    </li>
+    <li *ngIf="userIsAuthenticated">
+        <a mat-button routerLink="/Messages" routerLinkActive="mat-accent">Messages</a>
+      </li>
+      <li *ngIf="userIsAuthenticated">
+        <a mat-button routerLink="/Admin List" routerLinkActive="mat-accent">Admin List</a>
+      </li>
+    <li *ngIf="userIsAuthenticated">
+        <button mat-button (click)="onLogout()">Logout</button>
+      </li>
+
+      <li >
+
+     
+    
+  </ul>
+</mat-toolbar>

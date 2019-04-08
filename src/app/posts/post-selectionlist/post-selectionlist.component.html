@@ -1,0 +1,9 @@
+<mat-selection-list #shoes>
+  <mat-list-option *ngFor="let shoe of typesOfService" (click)="onAreaListControlChanged(shoe)" [value]="shoe">
+    {{shoe}}
+  </mat-list-option>
+</mat-selection-list>
+
+<p>
+  Options selected: {{shoes.selectedOptions.selected.length}}
+</p>

@@ -1,0 +1,45 @@
+<mat-card>
+  <mat-spinner *ngIf="isLoading"></mat-spinner>
+  <form (submit)="onSavePost(postForm)" #postForm="ngForm" *ngIf="!isLoading">
+    <mat-form-field>
+      <textarea
+        matInput
+        rows="4"
+        type="text"
+        name="title"
+        [ngModel]="selectedprefix + messagetemplate + bottomspace + selectedSuffix"
+        required
+        minlength="3"
+        placeholder="Post Title"
+        #title="ngModel"></textarea>
+      <mat-error *ngIf="title.invalid">Please enter a post title.</mat-error>
+    </mat-form-field>
+    
+      <mat-form-field>
+          <mat-select placeholder="Select Prefix" [(value)]="selectedprefix">
+            <mat-option *ngFor="let food of preffixArray" [value]="food">
+                {{food}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-select placeholder="Select Suffix" [(value)]="selectedSuffix">
+              <mat-option *ngFor="let food of suffixArray" [value]="food">
+                {{food}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field>
+              <mat-select placeholder="Select message template" [(value)]="messagetemplate">
+                <mat-option *ngFor="let food of templateNameArray" [value]="food.message">
+                  {{food.name}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <button
+            mat-raised-button
+            color="accent"
+            type="submit">Send Post</button>
+  </form>
+</mat-card>
+<app-post-selectionlist></app-post-selectionlist>
